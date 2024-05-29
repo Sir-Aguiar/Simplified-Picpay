@@ -22,7 +22,7 @@ public class NotificationService {
         "https://util.devi.tools/api/v1/notify",
         notificationRequest, String.class);
 
-    if (!(notificationResponse.getStatusCode() == HttpStatus.OK)) {
+    if (!(notificationResponse.getStatusCode().value() == 204)) {
       System.out.println("Error sending notification");
       throw new Exception("Notification service is offline");
     }
