@@ -32,7 +32,7 @@ public class UserService {
     return newUser;
   }
 
-  public List<User> getAllUsers () {
+  public List<User> getAllUsers() {
     return this.userRepository.findAll();
   }
 

@@ -27,7 +27,6 @@ public class TransactionService {
   @Autowired
   private NotificationService notificationService;
 
-
   @Autowired
   private RestTemplate restTemplate;
 
@@ -66,7 +65,11 @@ public class TransactionService {
   public boolean authorizeTransaction(User sender, BigDecimal amount) throws Exception {
     ResponseEntity<Map> response = this.restTemplate.getForEntity("https://util.devi.tools/api/v2/authorize",
         Map.class);
-
-    return response.getStatusCode() == HttpStatus.OK;
+    if (response.getStatusCode() == HttpStatus.OK) {
+      String message = (String) response.getBody().get("status");
+      return "success".equalsIgnoreCase(message);
+    } else {
+      return false;
+    }
   }
 }
